@@ -7,12 +7,33 @@ console.log('======= BOIL ========');
 
 class Game {
 
+    _keyDownEvents;
+
+    constructor() {
+        this._keyDownEvents = [];
+        this._handleKeyDown = this._handleKeyDown.bind(this);
+
+        document.addEventListener('keydown', this._handleKeyDown);
+    }
+
     set color(value) {
         document.body.style.backgroundColor = value;
     }
 
     set name(value) {
         document.title = value;
+    }
+
+    _handleKeyDown(e) {
+        let event = this._keyDownEvents[e.keyCode];
+        
+        if (event) {
+            event()
+        }
+    }
+
+    keyDown(key, event) {
+        this._keyDownEvents[key] = event;
     }
 
     addRectangle = () => {
@@ -36,6 +57,7 @@ class Game {
     addTimer = () => {
         return new Timer();
     }
+
 }
 
 let game = new Game();

@@ -47,3 +47,12 @@ timer.repeat = true;
 timer.start();
 
 
+function spacePressed() {
+    if (timer.running) {
+        timer.stop();
+    } else {
+        timer.start();
+    }
+}
+
+game.keyDown(32, spacePressed);
