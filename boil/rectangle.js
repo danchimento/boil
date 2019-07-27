@@ -5,8 +5,8 @@ export default class Rectangle extends Element {
     constructor() {
         super();
 
-        this.elem.style.width = "50px";
-        this.elem.style.height = "50px";
-        this.elem.style.backgroundColor = "#aaa";
+        this._elem.style.width = "50px";
+        this._elem.style.height = "50px";
+        this._elem.style.backgroundColor = "#aaa";
     }
 }

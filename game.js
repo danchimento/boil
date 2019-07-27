@@ -1,58 +1,39 @@
-import game from './boil/boil.js';
+import game from './boil/index.js';
 
-game.color = "#ddd";
-game.name = 'Boxes';
+var player = game.addRectangle();
+player.left = 100;
+player.top = 100;
+player.backgroundColor = "red";
 
-var rectangle1 = game.addRectangle();
-rectangle1.left = 400;
-rectangle1.top = 200;
-rectangle1.color = "blue";  
+var board = game.addRectangle();
+board.left = 50;
+board.top = 50;
+board.width = 300;
+board.height = 200;
+board.backgroundColor = "transparent";
+board.borderColor = "black"
 
-var circle = game.addCircle();
-circle.left = 100;
-circle.top = 100;
-
-function button1Click() {
-    rectangle1.left += 15;
-    rectangle1.visible = true;
-    timer.stop();
-}
-
-var button1 = game.addButton();
-button1.left = 100;
-button1.text = "Right"
-button1.click = button1Click;
-
-function button2Click() {
-    rectangle1.left -= 15;
-    rectangle1.visible = false;
-}
-
-var button2 = game.addButton();
-button2.text = "Left"
-button2.click = button2Click;
-
-function timerTick() {
-    rectangle1.left -= 10;
-
-    if (rectangle1.left < 0) {
-        timer.stop();
+game.keyDown(37, function() {
+    if (player.left > board.left) {
+        player.left -= 10;
     }
-}
+});
 
-var timer = game.addTimer();
-timer.delay = 32;
-timer.tick = timerTick;
-timer.repeat = true;
-timer.start();
-
-
-function spacePressed() {
-    if (timer.running) {
-        timer.stop();
-    } else {
-        timer.start();
+game.keyDown(38, function() {
+    if (player.top > board.top) {
+        player.top -= 10;
     }
-}
+});
 
-game.keyDown(32, spacePressed);
+game.keyDown(39, function() {
+    if (player.right  < board.right) {
+        player.left += 10;
+    }
+});
+
+game.keyDown(40, function() {
+    if (player.bottom < board.bottom) {
+        player.top += 10;
+    }
+});
+
